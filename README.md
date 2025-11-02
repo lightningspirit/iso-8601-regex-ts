@@ -3,13 +3,31 @@
 This repository contains a **fully validated ISO 8601 datetime regular expression** and a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module.
 It ensures that timestamps strictly follow ISO 8601 formatting **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets.
 
+## Why
+
+1. After compilation, RegExp are fast and reliable
+2. Gregorian DateTime logic does not change — it is essentially static
+3. Because `Date` does not validate it semantically (eg. calendar correctness)
+
+```js
+new Date('2025-11-31T00:00:00Z')
+// 2025-12-01T00:00:00.000Z
+```
+In this example, passing `November 31st` will convert to `1st of December`, which can lead to VERY nasty bugs and exploits in some contexts (eg. money, enforcing contract dates, etc).
+
 ## Usage
 
 ```js
 import { ISODateRegex } from './strict-iso-date-regex.js';
 
-ISODateRegex.test('2025-11-02T10:20:30.123Z'); // true
+ISODateRegex.test('2025-11-02T00:00:00.000Z'); // true — within boundaries
+ISODateRegex.test('2025-11-31T00:00:00.000Z'); // false — only 30 days in November
+
+ISODateRegex.test('2024-02-29T00:00:00.000Z'); // true — 2024 was a leap year
+ISODateRegex.test('2025-02-29T00:00:00.000Z'); // false — not a leap year
 ```
+
+## Mechanics
 
 The regex matches only **valid and complete** ISO 8601 datetime strings of the form:
 
