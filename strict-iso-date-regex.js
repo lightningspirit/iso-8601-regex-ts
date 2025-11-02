@@ -1,4 +1,4 @@
-export const ISODateRegex = new RegExp(
+export const ISO8601Regex = new RegExp(
   '^' +
     '(?:' +
       '(?:' +
@@ -42,4 +42,3 @@ export const ISODateRegex = new RegExp(
     '(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d)' +
   '$'
 );
-

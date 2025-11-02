@@ -18,19 +18,19 @@ In this example, passing `November 31st` will convert to `1st of December`, whic
 ## Usage
 
 ```js
-import { ISODateRegex } from './strict-iso-date-regex.js';
+import { ISO8601Date } from './strict-iso-date-regex.js';
 
-ISODateRegex.test('2025-11-02T00:00:00.000Z'); // true — within boundaries
-ISODateRegex.test('2025-11-31T00:00:00.000Z'); // false — only 30 days in November
+ISO8601Date.test('2025-11-02T00:00:00.000Z'); // true — within boundaries
+ISO8601Date.test('2025-11-31T00:00:00.000Z'); // false — only 30 days in November
 
-ISODateRegex.test('2024-02-29T00:00:00.000Z'); // true — 2024 was a leap year
-ISODateRegex.test('2025-02-29T00:00:00.000Z'); // false — not a leap year
+ISO8601Date.test('2024-02-29T00:00:00.000Z'); // true — 2024 was a leap year
+ISO8601Date.test('2025-02-29T00:00:00.000Z'); // false — not a leap year
 ```
 
 When you get as input any ISO 8601 string, just use this to check its correctness.
 
 ```js
-if (!ISODateRegex.test(request.startDate)) {
+if (!ISO8601Date.test(request.startDate)) {
   throw new Error('Invalid ISO 8601 DateString');
 }
 

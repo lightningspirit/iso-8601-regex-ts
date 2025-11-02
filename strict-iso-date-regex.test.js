@@ -1,8 +1,8 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { ISODateRegex } from './strict-iso-date-regex.js';
+import { ISO8601Regex } from './strict-iso-date-regex.js';
 
-describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
+describe('ISO8601Regex — strict ISO 8601 with calendar correctness', () => {
   test('accepts basic valid forms (UTC, fractional, offsets)', async (t) => {
     const cases = [
       ['basic UTC', '2025-11-02T10:20:30Z'],
@@ -14,7 +14,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['offset +09:30 with fraction', '2025-11-02T10:20:30.5+09:30'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(ISODateRegex.test(input), `Expected match: ${input}`));
+      await t.test(label, () => assert.ok(ISO8601Date.test(input), `Expected match: ${input}`));
     }
   });
 
@@ -28,7 +28,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['offset +00:00 with ms', '2025-11-02T23:59:59.999+00:00'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(ISODateRegex.test(input), `Expected match: ${input}`));
+      await t.test(label, () => assert.ok(ISO8601Date.test(input), `Expected match: ${input}`));
     }
   });
 
@@ -40,7 +40,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['Nov 30th', '2025-11-30T12:00:00Z'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(ISO8601Date.test(input)));
     }
   });
 
@@ -55,7 +55,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['offset minute 60', '2025-11-02T10:20:30+23:60'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input), `Expected no match: ${input}`));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input), `Expected no match: ${input}`));
     }
   });
 
@@ -72,7 +72,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['extra suffix', '2025-11-02T10:20:30Z#'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -88,7 +88,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['Day 32', '2025-11-32T12:00:00Z'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -101,7 +101,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['1996-02-29 (divisible by 4)', '1996-02-29T12:00:00-03:30'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(ISO8601Date.test(input)));
     }
   });
 
@@ -113,7 +113,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['2023-02-29 (common year)', '2023-02-29T12:00:00Z'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -125,10 +125,10 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
     ];
     const invalidCases = [['Feb 30', '2025-02-30T12:00:00Z']];
     for (const [label, input] of validCases) {
-      await t.test(`valid ${label}`, () => assert.ok(ISODateRegex.test(input)));
+      await t.test(`valid ${label}`, () => assert.ok(ISO8601Date.test(input)));
     }
     for (const [label, input] of invalidCases) {
-      await t.test(`invalid ${label}`, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(`invalid ${label}`, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -141,7 +141,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['lowercase z', '2025-11-02T10:20:30z'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -153,7 +153,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['tab suffix', '2025-11-02T10:20:30Z\t'],
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(!ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(!ISO8601Date.test(input)));
     }
   });
 
@@ -167,7 +167,7 @@ describe('ISODateRegex — strict ISO 8601 with calendar correctness', () => {
       ['leap 2400 Feb 29', '2400-02-29T00:00:00Z'], // far future leap century
     ];
     for (const [label, input] of cases) {
-      await t.test(label, () => assert.ok(ISODateRegex.test(input)));
+      await t.test(label, () => assert.ok(ISO8601Date.test(input)));
     }
   });
 });
