@@ -1,0 +1,38 @@
+{
+  "name": "strict-iso-8601-regex",
+  "version": "0.1.0",
+  "description": "A strict ISO 8601 datetime validation regex with full calendar correctness (leap years, day/month limits, and timezone validation). Includes a comprehensive node:test suite.",
+  "type": "module",
+  "main": "./strict-iso-8601-regex.js",
+  "exports": {
+    ".": "./strict-iso-8601-regex.js",
+    "./test": "./strict-iso-8601-regex.test.js"
+  },
+  "scripts": {
+    "test": "node --test strict-iso-8601-regex.test.js"
+  },
+  "keywords": [
+    "iso8601",
+    "regex",
+    "datetime",
+    "validation",
+    "node:test",
+    "leap-year",
+    "calendar",
+    "timezone",
+    "strict"
+  ],
+  "author": "lightningspirit <lightningspirit@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gist.github.com/01084f5674f70216a56b1c26ab364848.git"
+  },
+  "bugs": {
+    "url": "https://gist.github.com/lightningspirit/01084f5674f70216a56b1c26ab364848"
+  },
+  "homepage": "https://gist.github.com/lightningspirit/01084f5674f70216a56b1c26ab364848#file-readme-md"
+}
