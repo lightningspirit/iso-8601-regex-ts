@@ -27,6 +27,17 @@ ISODateRegex.test('2024-02-29T00:00:00.000Z'); // true — 2024 was a leap year
 ISODateRegex.test('2025-02-29T00:00:00.000Z'); // false — not a leap year
 ```
 
+When you get as input any ISO 8601 string, just use this to check its correctness.
+
+```js
+if (!ISODateRegex.test(request.startDate)) {
+  throw new Error('Invalid ISO 8601 DateString');
+}
+
+// safe startDate without temperings
+const startDate = new Date(request.startDate);
+```
+
 ## Mechanics
 
 The regex matches only **valid and complete** ISO 8601 datetime strings of the form:
