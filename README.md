@@ -1,7 +1,7 @@
 # Strict ISO 8601 Date Regex Test Suite
 
-This repository contains a **fully validated ISO 8601 datetime regular expression** and a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module.
-It ensures that timestamps strictly follow ISO 8601 formatting **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets.
+This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** and a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module.
+It ensures that timestamps strictly follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) formatting and [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) strictness **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets.
 
 ## Why
 
@@ -16,6 +16,8 @@ new Date('2025-11-31T00:00:00Z')
 In this example, passing `November 31st` will convert to `1st of December`, which can lead to VERY nasty bugs and exploits in some contexts (eg. money, enforcing contract dates, etc).
 
 ## Usage
+
+### Test for strict RFC 3339 correctness
 
 ```js
 import { ISO8601Date } from './strict-iso-date-regex.js';
@@ -37,6 +39,47 @@ if (!ISO8601Date.test(request.startDate)) {
 // safe startDate without temperings
 const startDate = new Date(request.startDate);
 ```
+
+### Using group captured values
+
+This regex provides **named capturing groups** for every major datetime component.
+You can use `RegExp.prototype.exec()` (or `.match()` with the `d` flag in future ECMAScript versions) to access them directly.
+
+```js
+import { ISO8601Date } from './strict-iso-date-regex.js';
+
+const match = ISO8601Date.exec('2025-11-02T10:20:30.123+09:30');
+
+if (match) {
+  const g = match.groups;
+  console.log(g);
+  /*
+  {
+    year: '2025',
+    month: '11',
+    day: '02',
+    hour: '10',
+    minute: '20',
+    second: '30',
+    millisecond: '123',
+    timezone: '+09:30'
+  }
+  */
+}
+```
+
+#### Examples
+
+| Input string                    | Captured values                                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `2025-11-02T10:20:30Z`          | `{ year: '2025', month: '11', day: '02', hour: '10', minute: '20', second: '30', millisecond: undefined, timezone: 'Z' }`      |
+| `2038-01-19T03:14:07.045+13:59` | `{ year: '2038', month: '01', day: '19', hour: '03', minute: '14', second: '07', millisecond: '045', timezone: '+13:59' }`     |
+| `2000-02-29T00:00:00-12:00`     | `{ year: '2000', month: '02', day: '29', hour: '00', minute: '00', second: '00', millisecond: undefined, timezone: '-12:00' }` |
+| `2024-06-10T09:08:07.5+14:00`   | `{ year: '2024', month: '06', day: '10', hour: '09', minute: '08', second: '07', millisecond: '5', timezone: '+14:00' }`       |
+
+> **Tip:** The `millisecond` field may be `undefined` if no fractional component is present.
+> This is especially useful when normalizing ISO timestamps or building custom date-time parsers.
+
 
 ## Mechanics
 
@@ -127,7 +170,45 @@ node --test strict-iso-date-regex.test.js
 ## References
 
 * [ISO 8601:2019 — Date and time format specification](https://www.iso.org/iso-8601-date-and-time-format.html)
+* [RFC 3339 — Date and Time on the Internet: Timestamps](https://datatracker.ietf.org/doc/html/rfc3339)
 * [ECMAScript Date.toISOString()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+
+## Changelog
+
+### v0.2.0 — 2025-11-03
+
+**Breaking**
+
+* Validate strict timezone range `−12:00…+14:00`
+
+**Added**
+
+* Named capturing groups: `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, and `timezone`.
+* New section in README: **“Using group captured values”**, with examples and table of captured outputs.
+* Extended test suite for group extraction (`node:test`).
+
+**Improved**
+
+* Simplified month capture pattern (`0[1-9]|1[0-2]`) for readability and correctness.
+* Refined timezone range enforcement: now validates strictly within **−12:00 … +14:00**, rejecting `−12:01…−12:59` and `+14:01…+14:59`.
+* Unified spelling to **`millisecond`** across code and documentation.
+
+### v0.1.1 — 2025-11-02
+
+**Added**
+
+* Strict ISO 8601 regex with full Gregorian calendar correctness (month/day validation and leap-year logic).
+* Test suite using Node’s native `node:test` and `assert/strict` modules.
+* Validation of fractional seconds, offsets, and anchors.
+
+**Improved**
+
+* Leap-year computation: accepts `2000`, `2400`, rejects `1900`, `2100`.
+* Tests covering non-ISO shapes and extended formats.
+
+### v0.1.0 — 2025-11-02
+
+**Initial release:** foundational strict ISO 8601 validation for UTC.
 
 ## License
 
