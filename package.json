@@ -1,6 +1,6 @@
 {
   "name": "iso-8601-regex",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A strict ISO 8601 (RFC 3339) datetime validation regex with full calendar correctness (leap years, day/month limits, and timezone validation). Includes a comprehensive node:test suite.",
   "type": "module",
   "main": "./strict-iso-8601-regex.js",
@@ -35,8 +35,5 @@
     "type": "git",
     "url": "git+https://gist.github.com/01084f5674f70216a56b1c26ab364848.git"
   },
-  "bugs": {
-    "url": "https://gist.github.com/lightningspirit/01084f5674f70216a56b1c26ab364848"
-  },
-  "homepage": "https://gist.github.com/lightningspirit/01084f5674f70216a56b1c26ab364848#file-readme-md"
+  "homepage": "https://lightningspir.it/iso-8601-regex"
 }

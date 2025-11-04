@@ -1,4 +1,4 @@
-# Strict ISO 8601 Date Regex Test Suite
+# Strict ISO 8601 (RFC 3339) Date Regex
 
 This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** and a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module.
 It ensures that timestamps strictly follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) formatting and [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) strictness **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets.
@@ -174,6 +174,11 @@ node --test strict-iso-date-regex.test.js
 * [ECMAScript Date.toISOString()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
 
 ## Changelog
+
+### v0.2.1 — 2025-11-04
+
+* Changing README.md title
+* Update homepage URL in `package.json`
 
 ### v0.2.0 — 2025-11-03
 
