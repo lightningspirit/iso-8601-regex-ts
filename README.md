@@ -20,7 +20,7 @@ In this example, passing `November 31st` will convert to `1st of December`, whic
 ### Test for strict RFC 3339 correctness
 
 ```js
-import { ISO8601Date } from './strict-iso-date-regex.js';
+import { ISO8601Date } from 'iso-8601-regex';
 
 ISO8601Date.test('2025-11-02T00:00:00.000Z'); // true — within boundaries
 ISO8601Date.test('2025-11-31T00:00:00.000Z'); // false — only 30 days in November
@@ -46,7 +46,7 @@ This regex provides **named capturing groups** for every major datetime componen
 You can use `RegExp.prototype.exec()` (or `.match()` with the `d` flag in future ECMAScript versions) to access them directly.
 
 ```js
-import { ISO8601Date } from './strict-iso-date-regex.js';
+import { ISO8601Date } from 'iso-8601-regex';
 
 const match = ISO8601Date.exec('2025-11-02T10:20:30.123+09:30');
 
@@ -157,7 +157,7 @@ The test suite verifies:
 Make sure you’re using **Node.js v20+**, then run:
 
 ```bash
-node --test strict-iso-date-regex.test.js
+npm test
 ```
 
 ## Notes & Limitations
@@ -174,6 +174,10 @@ node --test strict-iso-date-regex.test.js
 * [ECMAScript Date.toISOString()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
 
 ## Changelog
+
+### v0.2.2 — 2025-11-04
+
+* Update import example in README.md
 
 ### v0.2.1 — 2025-11-04
 

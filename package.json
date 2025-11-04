@@ -1,6 +1,6 @@
 {
   "name": "iso-8601-regex",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A strict ISO 8601 (RFC 3339) datetime validation regex with full calendar correctness (leap years, day/month limits, and timezone validation). Includes a comprehensive node:test suite.",
   "type": "module",
   "main": "./strict-iso-8601-regex.js",
