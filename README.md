@@ -175,6 +175,10 @@ npm test
 
 ## Changelog
 
+### v0.2.4 — 2025-11-12
+
+* Security enhancement, added provenance files
+
 ### v0.2.3 — 2025-11-12
 
 * Added CommonJS export
