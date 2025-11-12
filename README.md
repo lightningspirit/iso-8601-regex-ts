@@ -175,6 +175,12 @@ npm test
 
 ## Changelog
 
+### v0.2.3 — 2025-11-12
+
+* Added CommonJS export
+* Improved test suite with performance tests
+* Moved to a proper repository
+
 ### v0.2.2 — 2025-11-04
 
 * Update import example in README.md

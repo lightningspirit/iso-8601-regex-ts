@@ -1,0 +1,8 @@
+*.test.js
+*.test.cjs
+*.spec.js
+.git*
+.vscode/
+.idea/
+node_modules/
+*.log
