@@ -1,30 +1,49 @@
 {
   "name": "iso-8601-regex",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A strict ISO 8601 (RFC 3339) datetime validation regex with full calendar correctness (leap years, day/month limits, and timezone validation). Includes a comprehensive node:test suite.",
   "type": "module",
-  "main": "./strict-iso-8601-regex.js",
+  "main": "./strict-iso-8601-regex.cjs",
+  "module": "./strict-iso-8601-regex.js",
   "types": "./strict-iso-8601-regex.d.ts",
   "exports": {
     ".": {
+      "types": "./strict-iso-8601-regex.d.ts",
       "import": "./strict-iso-8601-regex.js",
-      "types": "./strict-iso-8601-regex.d.ts"
+      "require": "./strict-iso-8601-regex.cjs",
+      "default": "./strict-iso-8601-regex.js"
     },
-    "./test": "./strict-iso-8601-regex.test.js"
+    "./test": "./strict-iso-8601-regex.test.js",
+    "./package.json": "./package.json"
   },
+  "files": [
+    "strict-iso-8601-regex.js",
+    "strict-iso-8601-regex.cjs",
+    "strict-iso-8601-regex.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "node --test strict-iso-8601-regex.test.js"
+    "test": "node --test strict-iso-8601-regex.test.js strict-iso-8601-regex.test.cjs",
+    "prepublishOnly": "npm test"
   },
   "keywords": [
     "iso8601",
+    "iso-8601",
+    "rfc3339",
     "regex",
+    "regexp",
     "datetime",
+    "date",
+    "time",
     "validation",
+    "validator",
     "node:test",
     "leap-year",
     "calendar",
     "timezone",
-    "strict"
+    "strict",
+    "typescript"
   ],
   "author": "lightningspirit <lightningspirit@gmail.com>",
   "license": "MIT",
@@ -33,7 +52,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gist.github.com/01084f5674f70216a56b1c26ab364848.git"
+    "url": "git+https://github.com/lightningspirit/iso-8601-regex-ts.git"
   },
-  "homepage": "https://lightningspir.it/iso-8601-regex"
+  "bugs": {
+    "email": "lightningspirit+bug-report@gmail.com",
+    "url": "https://github.com/lightningspirit/iso-8601-regex-ts/issues"
+  },
+  "homepage": "https://lightningspir.it/iso-8601-regex",
+  "sideEffects": false
 }
