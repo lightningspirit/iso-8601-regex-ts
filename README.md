@@ -1,17 +1,17 @@
 # Strict ISO 8601 (RFC 3339) Date Regex
 
-This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** with **top-tier performance**, **dependency-free**, and **Regex-DoS resistant** with low-memory footprint.
+This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** with **top-tier performance**, is **dependency-free** and **ReDoS-resistant**, with a low memory footprint.
 
 It ensures that timestamps strictly follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) formatting and [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) strictness **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets, validated by a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module and a **benchmark** [runtime](#performance) against major validators.
 
 ## Highlights
 
 - **Strict by construction** — calendar-correct (leap years, 30/31 days, Feb 29) and RFC 3339 timezone range (`−12:00 … +14:00`). What `Date.parse` silently accepts, this rejects.
-- **Top-tier performance** — outperforms `zod`, `validator.js`, `ajv`, `Date.parse`, `date-fns`, `luxon`, and `dayjs` on the benchmark inputs shown below ([benchmarks](#performance)). Up to **~100× faster than alternatives on invalid rejection.**
+- **Top-tier performance** — competitive with `zod`, `validator.js`, `ajv`, `Date.parse`, `date-fns`, `luxon`, and `dayjs` on valid ISO 8601 inputs shown below, and significantly faster on invalid/fuzzy rejection ([benchmarks](#performance)). Up to **~100× faster than alternatives on invalid rejection.**
 - **Low allocation** — measured at <4 bytes/validation, with minimal observed GC overhead.
 - **ReDoS-hardened** — no catastrophic backtracking. Worst observed latency on adversarial input is **~1.5 µs**; fuzzed with 10 000 random strings via `fast-check` — zero crashes, zero hangs.
 - **Zero runtime dependencies, zero side effects** — one regex, ESM + CJS + `.d.ts`.
-- **Named capture groups** — `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `timezone` — parse and validate in one pass, in a way that you can use this to even build your own custom date-time parser if you want to.
+- **Named capture groups** — `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `timezone` — parse and validate in one pass, making it easy to build your own custom date-time parser.
 
 ## Why
 
