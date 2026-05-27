@@ -6,8 +6,8 @@ It ensures that timestamps strictly follow [ISO 8601](https://www.iso.org/iso-86
 ## Highlights
 
 - 🛡️ **Strict by construction** — calendar-correct (leap years, 30/31 days, Feb 29) and RFC 3339 timezone range (`−12:00 … +14:00`). What `Date.parse` silently accepts, this rejects.
-- ⚡ **Fastest validator in the JS ecosystem** — outperforms `zod`, `validator.js`, `ajv`, `Date.parse`, `date-fns`, `luxon`, and `dayjs` across valid, invalid, and adversarial inputs ([benchmarks](#performance)). Up to **~170× faster than `zod` on invalid rejection.**
-- 🪶 **Effectively zero allocation** — 0.3–3.7 bytes/validation. No GC pressure at scale.
+- ⚡ **Top-tier performance in our benchmarks** — outperforms `zod`, `validator.js`, `ajv`, `Date.parse`, `date-fns`, `luxon`, and `dayjs` on the benchmark inputs shown below ([benchmarks](#performance)). Up to **~170× faster than `zod` on invalid rejection.**
+- 🪶 **Low allocation in our benchmarks** — measured at 0.3–3.7 bytes/validation, with minimal observed GC overhead at scale.
 - 🔒 **ReDoS-hardened** — no catastrophic backtracking. Worst observed latency on adversarial input is **~1.5 µs**; fuzzed with 10 000 random strings via `fast-check` — zero crashes, zero hangs.
 - 📦 **Zero runtime dependencies, zero side effects** — one regex, ESM + CJS + `.d.ts`.
 - 🏷️ **Named capture groups** — `year`, `month`, `day`, `hour`, `minute`, `second`, `millisecond`, `timezone` — parse and validate in one pass.
@@ -107,7 +107,7 @@ Two kinds of library are compared in the same tables:
 
 Three columns matter:
 
-- **Throughput (ops/sec)** — each op = one full dataset pass (1 000 inputs for VALID/INVALID, 500 for FUZZY). Higher is better.
+- **Throughput (ops/sec)** — each op = one full dataset pass (1 000 inputs for VALID/INVALID/FUZZY). Higher is better.
 - **Heap bytes / validation** — approximate steady-state allocation per input (measured with `--expose-gc`). Lower is better. Anything in the thousands means GC pressure under load.
 - **Kind** — validator vs parser.
 

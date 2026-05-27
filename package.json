@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "test": "node --test strict-iso-8601-regex.test.js strict-iso-8601-regex.test.cjs",
-    "bench": "npm --prefix benchmark install --silent && npm --prefix benchmark start",
+    "bench": "npm --prefix benchmark ci --silent && npm --prefix benchmark start",
     "prepublishOnly": "npm test"
   },
   "keywords": [

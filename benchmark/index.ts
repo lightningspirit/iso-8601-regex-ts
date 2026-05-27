@@ -385,12 +385,22 @@ function measureMemory(
     entry.fn(dataset)
   }
 
+  if (gc) {
+    gc()
+    gc()
+  }
+
   const after =
     process.memoryUsage().heapUsed
   const totalValidations =
     dataset.length * iterations
+  const heapDelta = Math.max(
+    0,
+    after - before,
+  )
+
   return (
-    (after - before) / totalValidations
+    heapDelta / totalValidations
   )
 }
 

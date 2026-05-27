@@ -13,7 +13,7 @@ describe("ISO8601Regex — strict ISO 8601 with calendar correctness", () => {
       ["offset -05:00", "2025-11-02T10:20:30-05:00"],
       ["offset +09:30 with fraction", "2025-11-02T10:20:30.5+09:30"],
     ];
-    
+
     for (const [label, input] of cases) {
       await t.test(label, () =>
         assert.ok(ISO8601Regex.test(input), `Expected match: ${input}`)
