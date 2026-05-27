@@ -1,6 +1,6 @@
 # Strict ISO 8601 (RFC 3339) Date Regex
 
-This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** with **top-tier performance**, is **dependency-free** and **ReDoS-resistant**, with a low memory footprint.
+This repository contains a **fully validated strict ISO 8601 (RFC 3339) datetime regular expression** that delivers **top-tier performance**, remains **dependency-free** and **ReDoS-resistant**, and has a low memory footprint.
 
 It ensures that timestamps strictly follow [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) formatting and [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) strictness **with full calendar correctness**, including leap-year validation, month-day ranges, and time zone offsets, validated by a comprehensive **test suite** written with Node’s built-in [`node:test`](https://nodejs.org/api/test.html) module and a **benchmark** [runtime](#performance) against major validators.
 
