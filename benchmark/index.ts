@@ -385,11 +385,6 @@ function measureMemory(
     entry.fn(dataset)
   }
 
-  if (gc) {
-    gc()
-    gc()
-  }
-
   const after =
     process.memoryUsage().heapUsed
   const totalValidations =
